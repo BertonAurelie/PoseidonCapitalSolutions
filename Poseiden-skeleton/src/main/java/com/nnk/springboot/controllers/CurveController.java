@@ -1,6 +1,12 @@
 package com.nnk.springboot.controllers;
 
+import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.CurvePoint;
+import com.nnk.springboot.repositories.CurvePointRepository;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,14 +16,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class CurveController {
     // TODO: Inject Curve Point service
+    @Autowired
+    private CurvePointRepository curvePointRepository;
 
     @RequestMapping("/curvePoint/list")
     public String home(Model model)
     {
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
+        List<CurvePoint> curvePoints = curvePointRepository.findAll();
+        model.addAttribute("curvePoints", curvePoints);
+
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        model.addAttribute("username", username);
         // TODO: find all Curve Point, add to model
         return "curvePoint/list";
     }
