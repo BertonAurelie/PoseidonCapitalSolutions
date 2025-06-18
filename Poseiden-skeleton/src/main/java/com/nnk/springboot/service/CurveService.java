@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class CurveService {
     private static final Logger logger = LoggerFactory.getLogger(CurveService.class);
-    @Autowired
+
     CurvePointRepository curvePointRepository;
 
     public CurveService(CurvePointRepository curvePointRepository) {

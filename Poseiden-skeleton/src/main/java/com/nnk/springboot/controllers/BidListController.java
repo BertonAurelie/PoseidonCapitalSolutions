@@ -3,12 +3,10 @@ package com.nnk.springboot.controllers;
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.dto.BidListDto;
 import com.nnk.springboot.domain.dto.mapper.request.BidListMapper;
-import com.nnk.springboot.repositories.BidListRepository;
 import com.nnk.springboot.service.BidListService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,9 +18,12 @@ import org.springframework.web.bind.annotation.*;
 public class BidListController {
     private static final Logger logger = LoggerFactory.getLogger(BidListController.class);
 
-    @Autowired
+
     private BidListService bidListService;
 
+    public BidListController(BidListService bidListService) {
+        this.bidListService = bidListService;
+    }
 
     @RequestMapping("/bidList/list")
     public String home(Model model) {
@@ -40,9 +41,9 @@ public class BidListController {
     }
 
     @PostMapping("/bidList/validate")
-    public String validate(@ModelAttribute("BidListDto")@Valid BidListDto bid, BindingResult result, Model model) {
+    public String validate(@ModelAttribute("BidListDto") @Valid BidListDto bid, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            logger.info("error");
+            logger.info("some fields are empty");
             model.addAttribute("BidListDto", bid);
             return "bidList/add";
         }
@@ -62,21 +63,18 @@ public class BidListController {
 
     @GetMapping("/bidList/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        System.out.println("research id bid lists : " + bidListService.getBidListById(id));
         BidList bidList = bidListService.getBidListById(id);
-        model.addAttribute("BidListDto", BidListMapper.toDto(bidList)); // mappe l'entité en DTO
+        model.addAttribute("BidListDto", BidListMapper.toDto(bidList));
         model.addAttribute("bidId", id);
-        //model.addAttribute("bidList", bidListService.getBidListById(id));
-        //model.addAttribute("BidListDto",bidListService.getBidListById(id));
         return "bidList/update";
     }
 
     @PostMapping("/bidList/update/{id}")
-    public String updateBid(@PathVariable("id") Integer id, @ModelAttribute("BidListDto")@Valid BidListDto bid,
+    public String updateBid(@PathVariable("id") Integer id, @ModelAttribute("BidListDto") @Valid BidListDto bid,
                             BindingResult result, Model model) {
 
         if (result.hasErrors()) {
-            logger.info("errorUpdate");
+            logger.info("some fields are empty");
             model.addAttribute("BidListDto", bid);
             model.addAttribute("bidId", id);
             return "bidList/update";

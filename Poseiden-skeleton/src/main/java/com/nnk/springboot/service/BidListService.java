@@ -17,7 +17,7 @@ import java.util.Optional;
 public class BidListService {
 
     private static final Logger logger = LoggerFactory.getLogger(BidListService.class);
-    @Autowired
+
     private BidListRepository bidListRepository;
 
     public BidListService(BidListRepository bidListRepository) {

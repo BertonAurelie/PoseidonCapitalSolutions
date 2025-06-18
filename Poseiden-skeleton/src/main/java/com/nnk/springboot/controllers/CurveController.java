@@ -1,12 +1,10 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.domain.dto.CurvePointDto;
 import com.nnk.springboot.service.CurveService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +15,12 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class CurveController {
     private static final Logger logger = LoggerFactory.getLogger(CurveController.class);
-    @Autowired
+
     private CurveService curveService;
+
+    public CurveController(CurveService curveService) {
+        this.curveService = curveService;
+    }
 
     @RequestMapping("/curvePoint/list")
     public String home(Model model) {
