@@ -22,14 +22,14 @@ public class RatingService {
     }
 
 
-    public List<Rating> getRatingList(){
+    public List<Rating> getRatingList() {
         logger.info("loading rating list...");
         return ratingRepository.findAll();
     }
 
 
-    public Rating addRating(RatingDto dto){
-        if(dto.getOrderNumber() == null){
+    public Rating addRating(RatingDto dto) {
+        if (dto.getOrderNumber() == null) {
             dto.setOrderNumber(0);
         }
 
@@ -40,12 +40,12 @@ public class RatingService {
         return addedRating;
     }
 
-    public Rating getRatingById(Integer id){
+    public Rating getRatingById(Integer id) {
         logger.info("research rating by id....");
         Rating entity = new Rating();
         Optional<Rating> ratingOptional = ratingRepository.findById(id);
 
-        if(ratingOptional.isPresent()){
+        if (ratingOptional.isPresent()) {
             logger.info("rating successfully found");
             entity = ratingOptional.get();
         }
@@ -53,27 +53,27 @@ public class RatingService {
         return entity;
     }
 
-    public Rating updateRating(Integer id, RatingDto dto){
+    public Rating updateRating(Integer id, RatingDto dto) {
         Optional<Rating> ratingToUpdate = ratingRepository.findById(id);
 
-        if(!ratingToUpdate.isPresent()){
-           throw  new RuntimeException("rating is empty");
+        if (!ratingToUpdate.isPresent()) {
+            throw new RuntimeException("rating is empty");
         } else {
             var entity = ratingToUpdate.get();
 
-            if(dto.getMoodysRating() != null && !(entity.getMoodysRating().equalsIgnoreCase(dto.getMoodysRating())) ){
+            if (dto.getMoodysRating() != null && !(entity.getMoodysRating().equalsIgnoreCase(dto.getMoodysRating()))) {
                 entity.setMoodysRating(dto.getMoodysRating());
             }
 
-            if(dto.getFitchRating() != null && !(entity.getFitchRating().equalsIgnoreCase(dto.getFitchRating())) ){
+            if (dto.getFitchRating() != null && !(entity.getFitchRating().equalsIgnoreCase(dto.getFitchRating()))) {
                 entity.setFitchRating(dto.getFitchRating());
             }
 
-            if(dto.getSandPRating() != null && !(entity.getSandPRating().equalsIgnoreCase(dto.getSandPRating())) ){
+            if (dto.getSandPRating() != null && !(entity.getSandPRating().equalsIgnoreCase(dto.getSandPRating()))) {
                 entity.setSandPRating(dto.getSandPRating());
             }
 
-            if(dto.getOrderNumber() != null && !(entity.getOrderNumber() ==(dto.getOrderNumber())) ){
+            if (dto.getOrderNumber() != null && !(entity.getOrderNumber() == (dto.getOrderNumber()))) {
                 entity.setOrderNumber(dto.getOrderNumber());
             }
 
@@ -81,9 +81,9 @@ public class RatingService {
         }
     }
 
-    public void deleteRating(Integer id){
-        if(ratingRepository.findById(id) == null){
-            throw  new RuntimeException("Unknown rating");
+    public void deleteRating(Integer id) {
+        if (ratingRepository.findById(id) == null) {
+            throw new RuntimeException("Unknown rating");
         } else {
             ratingRepository.deleteById(id);
             logger.info("rating successfully deleted");

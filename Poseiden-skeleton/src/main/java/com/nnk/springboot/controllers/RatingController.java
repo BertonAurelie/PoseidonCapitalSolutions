@@ -1,11 +1,10 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.domain.dto.RatingDto;
-import com.nnk.springboot.domain.dto.mapper.request.BidListMapper;
 import com.nnk.springboot.domain.dto.mapper.request.RatingMapper;
 import com.nnk.springboot.service.RatingService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-
-import jakarta.validation.Valid;
-
 @Controller
 public class RatingController {
     private static final Logger logger = LoggerFactory.getLogger(RatingController.class);
@@ -26,7 +22,7 @@ public class RatingController {
     private RatingService ratingService;
 
     @RequestMapping("/rating/list")
-    public String home(Model model){
+    public String home(Model model) {
 
         model.addAttribute("ratings", ratingService.getRatingList());
 
@@ -73,7 +69,7 @@ public class RatingController {
 
     @PostMapping("/rating/update/{id}")
     public String updateRating(@PathVariable("id") Integer id, @ModelAttribute("RatingDto") @Valid RatingDto rating,
-                             BindingResult result, Model model) {
+                               BindingResult result, Model model) {
         if (result.hasErrors()) {
             logger.info("some fields are empty");
             model.addAttribute("RatingDto", rating);

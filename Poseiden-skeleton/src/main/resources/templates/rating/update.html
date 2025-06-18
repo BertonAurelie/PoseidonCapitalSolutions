@@ -8,7 +8,9 @@
 </head>
 <body>
 <div class="container">
-
+	<div th:if="${error}" style="color: red;">
+		<p th:text="${error}"></p>
+	</div>
 	<div class="row">
 		<h2>Update Rating</h2>
 	</div>
