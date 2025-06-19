@@ -87,6 +87,7 @@ public class RuleNameService {
         }
     }
 
+
     public void deleteRuleName(Integer id){
         if (!ruleNameRepository.existsById(id)) {
             throw new RequestException("Unknown ruleName");

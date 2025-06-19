@@ -1,55 +1,100 @@
 package com.nnk.springboot.controllers;
 
+import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.domain.Trade;
+import com.nnk.springboot.domain.dto.TradeDto;
+import com.nnk.springboot.domain.dto.mapper.request.RuleNameMapper;
+import com.nnk.springboot.domain.dto.mapper.request.TradeMapper;
+import com.nnk.springboot.service.RuleNameService;
+import com.nnk.springboot.service.TradeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 
 import jakarta.validation.Valid;
 
 @Controller
 public class TradeController {
-    // TODO: Inject Trade service
+    private static final Logger logger = LoggerFactory.getLogger(TradeController.class);
+    private TradeService tradeService;
+
+    public TradeController(TradeService tradeService) {
+        this.tradeService = tradeService;
+    }
 
     @RequestMapping("/trade/list")
-    public String home(Model model)
-    {
-        // TODO: find all Trade, add to model
+    public String home(Model model) {
+        model.addAttribute("trades", tradeService.getTradeList());
+
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        model.addAttribute("username", username);
+
         return "trade/list";
     }
 
     @GetMapping("/trade/add")
-    public String addUser(Trade bid) {
+    public String addUser(TradeDto bid, Model model) {
+        model.addAttribute("tradeDto", bid);
         return "trade/add";
     }
 
     @PostMapping("/trade/validate")
-    public String validate(@Valid Trade trade, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return Trade list
-        return "trade/add";
+    public String validate(@ModelAttribute("tradeDto") @Valid TradeDto trade, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            logger.info("some fields are empty");
+            model.addAttribute("tradeDto", trade);
+            return "trade/add";
+        }
+
+        try {
+            tradeService.addTrade(trade);
+            logger.info("trade successfully added, redirection...");
+        } catch (Exception e) {
+            logger.info("unable to add this trade");
+            model.addAttribute("error", e.getMessage());
+            return "trade/add";
+        }
+        return "redirect:/trade/list";
     }
 
     @GetMapping("/trade/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get Trade by Id and to model then show to the form
+        Trade trade = tradeService.getRuleNameById(id);
+        model.addAttribute("tradeDto", TradeMapper.toDto(trade));
+        model.addAttribute("tradeId", id);
         return "trade/update";
     }
 
     @PostMapping("/trade/update/{id}")
-    public String updateTrade(@PathVariable("id") Integer id, @Valid Trade trade,
+    public String updateTrade(@PathVariable("id") Integer id,@ModelAttribute("tradeDto") @Valid TradeDto trade,
                              BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Trade and return Trade list
+        if (result.hasErrors()) {
+            logger.info("some fields are empty (updating method)");
+            model.addAttribute("tradeDto", trade);
+            model.addAttribute("tradeId", id);
+            return "trade/update";
+        }
+
+        try {
+            tradeService.updateTrade(id, trade);
+            logger.info("trade successfully updated, redirection...");
+        } catch (Exception e) {
+            logger.info("unable to update this trade");
+            model.addAttribute("error", e.getMessage());
+            return "trade/update";
+        }
+
         return "redirect:/trade/list";
     }
 
     @GetMapping("/trade/delete/{id}")
     public String deleteTrade(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find Trade by Id and delete the Trade, return to Trade list
+        tradeService.deleteTrade(id);
         return "redirect:/trade/list";
     }
 }
