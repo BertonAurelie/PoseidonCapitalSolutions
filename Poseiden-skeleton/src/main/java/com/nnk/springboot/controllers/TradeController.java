@@ -1,12 +1,10 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.domain.dto.TradeDto;
-import com.nnk.springboot.domain.dto.mapper.request.RuleNameMapper;
 import com.nnk.springboot.domain.dto.mapper.request.TradeMapper;
-import com.nnk.springboot.service.RuleNameService;
 import com.nnk.springboot.service.TradeService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,9 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-
-import jakarta.validation.Valid;
 
 @Controller
 public class TradeController {
@@ -71,8 +66,8 @@ public class TradeController {
     }
 
     @PostMapping("/trade/update/{id}")
-    public String updateTrade(@PathVariable("id") Integer id,@ModelAttribute("tradeDto") @Valid TradeDto trade,
-                             BindingResult result, Model model) {
+    public String updateTrade(@PathVariable("id") Integer id, @ModelAttribute("tradeDto") @Valid TradeDto trade,
+                              BindingResult result, Model model) {
         if (result.hasErrors()) {
             logger.info("some fields are empty (updating method)");
             model.addAttribute("tradeDto", trade);
