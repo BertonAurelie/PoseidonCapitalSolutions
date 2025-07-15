@@ -5,9 +5,10 @@ import com.nnk.springboot.domain.dto.BidListDto;
 
 public class BidListMapper {
 
-    public BidListMapper() {}
+    public BidListMapper() {
+    }
 
-    public static BidList toEntity(BidListDto dto){
+    public static BidList toEntity(BidListDto dto) {
         BidList bidList = new BidList();
         bidList.setAccount(dto.getAccount());
         bidList.setType(dto.getType());
@@ -16,7 +17,7 @@ public class BidListMapper {
         return bidList;
     }
 
-    public static BidListDto toDto(BidList bidList){
+    public static BidListDto toDto(BidList bidList) {
         BidListDto dto = new BidListDto();
         dto.setAccount(bidList.getAccount());
         dto.setType(bidList.getType());

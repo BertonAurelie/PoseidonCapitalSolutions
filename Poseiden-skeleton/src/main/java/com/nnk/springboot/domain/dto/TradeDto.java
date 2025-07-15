@@ -12,7 +12,14 @@ public class TradeDto {
     @NotNull(message = "buyQuantity is mandatory")
     Double buyQuantity;
 
-    public TradeDto() {}
+    public TradeDto() {
+    }
+
+    public TradeDto(String account, String type, Double buyQuantity) {
+        this.account = account;
+        this.type = type;
+        this.buyQuantity = buyQuantity;
+    }
 
     public String getAccount() {
         return account;
@@ -37,4 +44,5 @@ public class TradeDto {
     public void setBuyQuantity(Double buyQuantity) {
         this.buyQuantity = buyQuantity;
     }
+
 }

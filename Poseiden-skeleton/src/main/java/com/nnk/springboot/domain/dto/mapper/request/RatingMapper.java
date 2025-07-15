@@ -5,9 +5,10 @@ import com.nnk.springboot.domain.dto.RatingDto;
 
 public class RatingMapper {
 
-    public RatingMapper() {}
+    public RatingMapper() {
+    }
 
-    public static Rating toEntity(RatingDto dto){
+    public static Rating toEntity(RatingDto dto) {
         Rating rating = new Rating();
 
         rating.setMoodysRating(dto.getMoodysRating());
@@ -18,7 +19,7 @@ public class RatingMapper {
         return rating;
     }
 
-    public static RatingDto toDto(Rating rating){
+    public static RatingDto toDto(Rating rating) {
         RatingDto dto = new RatingDto();
 
         dto.setFitchRating(rating.getFitchRating());

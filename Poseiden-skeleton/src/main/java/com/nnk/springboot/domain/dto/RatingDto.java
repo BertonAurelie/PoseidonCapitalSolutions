@@ -1,6 +1,5 @@
 package com.nnk.springboot.domain.dto;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 
 public class RatingDto {

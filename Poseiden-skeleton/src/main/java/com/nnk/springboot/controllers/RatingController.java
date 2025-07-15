@@ -23,7 +23,6 @@ public class RatingController {
 
     @RequestMapping("/rating/list")
     public String home(Model model) {
-
         model.addAttribute("ratings", ratingService.getRatingList());
 
         String username = SecurityContextHolder.getContext().getAuthentication().getName();

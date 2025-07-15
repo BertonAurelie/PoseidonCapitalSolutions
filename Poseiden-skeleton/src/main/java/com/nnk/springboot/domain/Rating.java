@@ -5,21 +5,21 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "rating")
 public class Rating {
-    // TODO: Map columns in data table RATING with corresponding java fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="moodys_rating")
+    @Column(name = "moodys_rating")
     private String moodysRating;
-    @Column(name="sand_p_rating")
+    @Column(name = "sand_p_rating")
     private String sandPRating;
-    @Column(name="fitch_rating")
+    @Column(name = "fitch_rating")
     private String fitchRating;
-    @Column(name="order_number")
+    @Column(name = "order_number")
     private Integer orderNumber;
 
-    public Rating() {}
+    public Rating() {
+    }
 
     public Rating(int id, String moodysRating, String sandPRating, String fitchRating, Integer orderNumber) {
         this.id = id;

@@ -3,13 +3,15 @@ package com.nnk.springboot.domain.dto;
 import jakarta.validation.constraints.NotBlank;
 
 public class BidListDto {
-    @NotBlank(message="Account is mandatory")
+    @NotBlank(message = "Account is mandatory")
     private String account;
-    @NotBlank(message="Type is mandatory")
+    @NotBlank(message = "Type is mandatory")
     private String type;
+
     private Double bidQuantity;
 
-    public BidListDto() {}
+    public BidListDto() {
+    }
 
     public BidListDto(String account, String type, Double bidQuantity) {
         this.account = account;

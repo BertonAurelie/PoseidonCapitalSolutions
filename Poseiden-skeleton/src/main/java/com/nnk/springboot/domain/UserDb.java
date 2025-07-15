@@ -16,7 +16,7 @@ public class UserDb {
     private String username;
     @NotBlank(message = "Password is mandatory")
     @Column(name = "password")
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[@#$%^&+=]).{8,}$", message = "invalid password")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,}$", message = "invalid password")
     private String password;
     @NotBlank(message = "FullName is mandatory")
     @Column(name = "full_name")

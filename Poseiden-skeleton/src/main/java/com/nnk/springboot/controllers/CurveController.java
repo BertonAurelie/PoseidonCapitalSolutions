@@ -78,7 +78,7 @@ public class CurveController {
         }
 
         try {
-            curveService.editCurvePoint(id, curvePoint);
+            curveService.updateCurvePoint(id, curvePoint);
             logger.info("curve point successfully updated, redirection...");
         } catch (Exception e) {
             logger.info("unable to update this curve point");

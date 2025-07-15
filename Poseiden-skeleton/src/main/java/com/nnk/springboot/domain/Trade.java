@@ -1,6 +1,7 @@
 package com.nnk.springboot.domain;
 
 import jakarta.persistence.*;
+
 import java.security.Timestamp;
 
 @Entity
@@ -9,11 +10,11 @@ public class Trade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name="account")
+    @Column(name = "account")
     String account;
     @Column(name = "type")
     String type;
-    @Column(name="buy_quantity")
+    @Column(name = "buy_quantity")
     Double buyQuantity;
 
     Double sellQuantity;
@@ -35,6 +36,12 @@ public class Trade {
     String side;
 
     public Trade() {
+    }
+
+    public Trade(String account, String type, Double buyQuantity) {
+        this.account = account;
+        this.type = type;
+        this.buyQuantity = buyQuantity;
     }
 
     public int getId() {

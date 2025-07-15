@@ -14,16 +14,17 @@ public class RuleName {
     private String name;
     @Column(name = "description")
     private String description;
-    @Column(name="json")
+    @Column(name = "json")
     private String json;
-    @Column(name="template")
+    @Column(name = "template")
     private String template;
-    @Column(name="sqlStr")
+    @Column(name = "sqlStr")
     private String sqlStr;
-    @Column(name="sqlPart")
+    @Column(name = "sqlPart")
     private String sqlPart;
 
-    public RuleName() {}
+    public RuleName() {
+    }
 
     public int getId() {
         return id;

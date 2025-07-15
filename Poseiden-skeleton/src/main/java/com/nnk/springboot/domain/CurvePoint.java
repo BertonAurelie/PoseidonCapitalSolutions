@@ -1,6 +1,7 @@
 package com.nnk.springboot.domain;
 
 import jakarta.persistence.*;
+
 import java.sql.Timestamp;
 
 @Entity
@@ -9,17 +10,23 @@ public class CurvePoint {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name="curve_id")
+    @Column(name = "curve_id")
     private int curveId;
-    @Column(name="term")
+    @Column(name = "term")
     private double term;
-    @Column(name="value")
+    @Column(name = "value")
     private double value;
 
     private Timestamp asOfDate;
     private Timestamp creationDate;
 
     public CurvePoint() {
+    }
+
+    public CurvePoint(int curveId, double term, double value) {
+        this.curveId = curveId;
+        this.term = term;
+        this.value = value;
     }
 
     //Getter & Setter

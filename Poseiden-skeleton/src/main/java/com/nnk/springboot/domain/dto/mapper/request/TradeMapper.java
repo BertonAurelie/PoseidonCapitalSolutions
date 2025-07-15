@@ -4,9 +4,10 @@ import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.domain.dto.TradeDto;
 
 public class TradeMapper {
-    public TradeMapper() {}
+    public TradeMapper() {
+    }
 
-    public static Trade toEntity(TradeDto dto){
+    public static Trade toEntity(TradeDto dto) {
         Trade trade = new Trade();
 
         trade.setAccount(dto.getAccount());
@@ -16,7 +17,7 @@ public class TradeMapper {
         return trade;
     }
 
-    public static TradeDto toDto(Trade trade){
+    public static TradeDto toDto(Trade trade) {
         TradeDto dto = new TradeDto();
 
         dto.setAccount(trade.getAccount());

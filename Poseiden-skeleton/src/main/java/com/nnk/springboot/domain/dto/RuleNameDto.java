@@ -3,17 +3,17 @@ package com.nnk.springboot.domain.dto;
 import jakarta.validation.constraints.NotBlank;
 
 public class RuleNameDto {
-    @NotBlank(message="name is mandatory")
+    @NotBlank(message = "name is mandatory")
     private String name;
-    @NotBlank(message="description is mandatory")
+    @NotBlank(message = "description is mandatory")
     private String description;
-    @NotBlank(message="json is mandatory")
+    @NotBlank(message = "json is mandatory")
     private String json;
-    @NotBlank(message="template is mandatory")
+    @NotBlank(message = "template is mandatory")
     private String template;
-    @NotBlank(message="sqlStr is mandatory")
+    @NotBlank(message = "sqlStr is mandatory")
     private String sqlStr;
-    @NotBlank(message="sqlPart is mandatory")
+    @NotBlank(message = "sqlPart is mandatory")
     private String sqlPart;
 
     public RuleNameDto() {

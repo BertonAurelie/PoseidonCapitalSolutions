@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 public class BidListController {
     private static final Logger logger = LoggerFactory.getLogger(BidListController.class);
 
-
     private BidListService bidListService;
 
     public BidListController(BidListService bidListService) {

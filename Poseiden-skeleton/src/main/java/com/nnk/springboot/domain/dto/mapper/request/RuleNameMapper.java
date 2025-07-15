@@ -2,13 +2,13 @@ package com.nnk.springboot.domain.dto.mapper.request;
 
 import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.domain.dto.RuleNameDto;
-import org.h2.bnf.Rule;
 
 public class RuleNameMapper {
 
-    public RuleNameMapper() {}
+    public RuleNameMapper() {
+    }
 
-    public static RuleName toEntity(RuleNameDto dto){
+    public static RuleName toEntity(RuleNameDto dto) {
         RuleName ruleName = new RuleName();
 
         ruleName.setName(dto.getName());
@@ -21,7 +21,7 @@ public class RuleNameMapper {
         return ruleName;
     }
 
-    public static RuleNameDto toDto(RuleName ruleName){
+    public static RuleNameDto toDto(RuleName ruleName) {
         RuleNameDto dto = new RuleNameDto();
 
         dto.setName(ruleName.getName());

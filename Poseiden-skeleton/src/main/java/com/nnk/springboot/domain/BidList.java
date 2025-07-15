@@ -1,6 +1,7 @@
 package com.nnk.springboot.domain;
 
 import jakarta.persistence.*;
+
 import java.security.Timestamp;
 
 @Entity
@@ -35,6 +36,12 @@ public class BidList {
     private String side;
 
     public BidList() {
+    }
+
+    public BidList(String account, String type, double bidQuantity) {
+        this.account = account;
+        this.type = type;
+        this.bidQuantity = bidQuantity;
     }
 
     public int getBidListId() {
